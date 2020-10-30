@@ -28,4 +28,3 @@ int main(){
     Ticket t;
     return 0;
 }
-
