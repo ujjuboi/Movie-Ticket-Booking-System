@@ -13,7 +13,7 @@ void menu(){
     char movie[100];
     cout<<"\t\t\tMovie Ticket Booking System"<<endl<<endl;
     cout<<"\t\t\t\tNow Showing"<<endl<<endl;
-    ifstream movielist("movielist.txt");
+    ifstream movielist("./TextFiles/movielist.txt");
     while(!movielist.eof()){
         movielist.getline(movie, 100);
         cout<<"\t\t\t\t"<<movie<<endl;
@@ -28,4 +28,3 @@ int main(){
     Ticket t;
     return 0;
 }
-
