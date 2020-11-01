@@ -7,20 +7,22 @@ using namespace std;
 class Booking{
     private:
     
-        char name[100], email[100], upi[100], confirm[7], mobile[10];
-
+        char confirm[7], mobile[10];
+        string email, upi, name;
         void customerInfo(){
             //gather customer info:
             cout<<"Please enter your name: ";
-            cin.getline(name, 100);
+            getline(cin, name, '\n');
             cout<<endl<<"Please enter your mobile number: ";
             cin>>mobile;
             cout<<endl<<"Please enter your Email ID: ";
             cin>>email;
-            if(strstr(email, "@") <= 0 ) {
+            if(email.find("@") == 0 || email.find("@") > 100) {
                 cout<<endl<<"Please enter a valid Email ID: ";
                 cin>>email;
             }
+            if (strcmp(confirm, "no") == 0)
+                payment();
         }
 
         int payment(){
@@ -30,28 +32,27 @@ class Booking{
             cout<<"Mobile Number: "<<mobile<<endl;
             cout<<"Email ID: "<<email<<endl;
             cout<<"Please type in 'correct' to confirm you details are correct else type 'no': ";
-            //Exception in turn of spelling:
-            try{
-                cin>>confirm;
-                //error here*
-                throw "Incorrect input, please check the spelling again.";
-            }
-            catch(const char* error){
-                cout<<error<<endl;
-                cin>>confirm;
-            }
+            //exception here: 
+            cin>>confirm;
             //confirm details:
+            CONFIRM:
             if(strcmp(confirm,"no") == 0){
-                cout<<"Please reenter your information again: "<<endl;
+                cout<<"Please reenter your information: "<<endl;
+                cin.ignore();
                 customerInfo();
             }
             else if(strcmp(confirm, "correct") == 0){
                 cout<<"Please enter you UPI ID: ";
                 cin>>upi;
-                if(strstr(upi, "@") > 0)
-                    return 1;
+                if(upi.find("@") == 0 || upi.find("@") > 100)
+                    return 0;
            }
-           return 0;
+           else{
+               cout<<"Incorrect Input"<<endl;
+               cin>>confirm;
+               goto CONFIRM;
+           }
+           return 1;
         }
     public:
         //display menu, starting point: 
