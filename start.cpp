@@ -5,7 +5,7 @@ using namespace std;
 
 class Admin{
     private:
-    int halls = 3, premiers = 5, timeslots = 9, rating = 0;
+    int halls = 3, premiers = 5, timeslots = 9;
 
     public:
     int assigner(){

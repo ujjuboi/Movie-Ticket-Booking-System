@@ -6,8 +6,8 @@ using namespace std;
 
 class Booking{
     private:
-    
-        char confirm[7], mobile[10];
+        
+        char confirm[7], mobile[10], movie[100], time[4];
         string email, upi, name;
         void customerInfo(){
             //gather customer info:
@@ -57,7 +57,6 @@ class Booking{
     public:
         //display menu, starting point: 
         void menu(){
-            char movie[100];
             cout<<"\t\t\tMovie Ticket Booking System"<<endl<<endl;
             cout<<"\t\t\t\tNow Showing"<<endl<<endl;
             ifstream movielist("./TextFiles/movielist.txt");
@@ -67,12 +66,30 @@ class Booking{
             }
             movielist.close();
         }
-        //after selecting movie of choice:
+
         void selection(){
+            //selection
+            cout<<"Please type the movie title you want to watch: ";
+            cin.getline(movie, 100);
+            //choose timings
+            ifstream timings("./TextFiles/timings.txt");
+            while(!timings.eof()){
+                timings.getline(time, 10);
+                cout<<"\t\t\t\t"<<time<<endl;
+            }
+            timings.close();
+            cout<<endl<<"Please type in your preferred timings: ";
+            cin>>time;
+            //after selecting movie of choice
+            cin.ignore();
             customerInfo();
             if(payment() == 1){
-                cout<<"Payment Done";
+                cout<<"Payment Done"<<endl<<endl;
                 //print full details
+                cout<<"\t\t\t\tBooking Confirmed for "<<name<<endl;
+                cout<<"\t\t\t\tMobile Number: "<<mobile<<endl;
+                cout<<"\t\t\t\tEmail ID: "<<email<<endl;
+                cout<<"\t\t\t\tShow: "<<movie<<" at "<<time<<endl;
             }
             else{
                 cout<<"Payment Failed, please retry after some time";
