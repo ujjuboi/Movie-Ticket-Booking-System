@@ -13,8 +13,14 @@ class Booking{
             //gather customer info:
             cout<<"Please enter your name: ";
             getline(cin, name, '\n');
+            //failsafe:
+            mobile[10] = '\0';
             cout<<endl<<"Please enter your mobile number: ";
             cin>>mobile;
+            if(mobile[10] != '\0'){
+                cout<<"Please enter a 10 digit mobile number: ";
+                cin>>mobile;
+            }
             cout<<endl<<"Please enter your Email ID: ";
             cin>>email;
             if(email.find("@") == 0 || email.find("@") > 100) {
@@ -35,7 +41,7 @@ class Booking{
             //exception here: 
             cin>>confirm;
             //confirm details:
-            CONFIRM:
+            HERE:
             if(strcmp(confirm,"no") == 0){
                 cout<<"Please reenter your information: "<<endl;
                 cin.ignore();
@@ -50,7 +56,7 @@ class Booking{
            else{
                cout<<"Incorrect Input"<<endl;
                cin>>confirm;
-               goto CONFIRM;
+               goto HERE;
            }
            return 1;
         }
@@ -79,7 +85,12 @@ class Booking{
             }
             timings.close();
             cout<<endl<<"Please type in your preferred timings: ";
-            cin>>time;
+            cin.getline(time, 6);
+            //failsafe:
+            if(strstr(time, ":") != ":"){
+                cout<<endl<<"Please type in the correct format with colon(:) ";
+                cin>>time;
+            }
             //after selecting movie of choice
             cin.ignore();
             customerInfo();
@@ -92,8 +103,9 @@ class Booking{
                 cout<<"\t\t\t\tShow: "<<movie<<" at "<<time<<endl;
             }
             else{
-                cout<<"Payment Failed, please retry after some time";
-                //redirect to main*
+                cout<<"Payment Failed, please type in a valid UPI ID: ";
+                //redirect to payment()
+                payment();
             }
         }
 }book;
