@@ -2,7 +2,7 @@
 
 ## Description:
 A CLI movie ticket booking system created using C++. The main purpose of this project was to implement basic Object Oriented Programming concepts like abstraction, inheritance and encapsulation.
-The program also implements file handling and for each succesful booking, the file is appended with the unique user_id generated through the built in random() in C++. It also uses
+The program also implements file handling and for each succesful booking, the file is appended with the unique `user_id` generated through the built in `random()` in C++. It also uses
 basic input formatting although the input is not stored in a databse but rather is printed on the file. There is also a function to generate seat map for each hall which can be commented
 out at first so that three identical files are created for each hall. 
 
